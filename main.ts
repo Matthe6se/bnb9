@@ -2,9 +2,29 @@ enum RadioMessage {
     message1 = 49434
 }
 function CODE5679 () {
-	
+    serial.writeNumbers([0, 1])
+    serial.redirect(
+    SerialPin.P0,
+    SerialPin.P1,
+    BaudRate.BaudRate115200
+    )
+    control.waitForEvent(0, 0)
+    control.raiseEvent(
+    EventBusSource.MICROBIT_ID_BUTTON_A,
+    EventBusValue.MICROBIT_EVT_ANY
+    )
+    control.raiseEvent(
+    EventBusSource.MICROBIT_ID_BUTTON_A,
+    EventBusValue.MICROBIT_EVT_ANY
+    )
+    radio.sendNumber(0)
+    radio.sendValue("name", 0)
 }
 radio.onReceivedNumber(function (receivedNumber) {
+    led.plotBarGraph(
+    0,
+    0
+    )
     control.waitForEvent(EventBusSource.MICROBIT_ID_BUTTON_A, control.eventTimestamp())
     control.raiseEvent(
     EventBusSource.MICROBIT_ID_BUTTON_A,
