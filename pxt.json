@@ -6,7 +6,9 @@
         "radio": "*",
         "microphone": "*",
         "datalogger": "*",
-        "radio-broadcast": "*"
+        "radio-broadcast": "*",
+        "pxt-sonar": "github:microsoft/pxt-sonar#v0.0.5",
+        "servo": "*"
     },
     "files": [
         "main.blocks",

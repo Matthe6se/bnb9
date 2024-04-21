@@ -1,11 +1,59 @@
 enum RadioMessage {
     message1 = 49434
 }
-input.onButtonPressed(Button.A, function () {
-    game.resume()
+function CODE5679 () {
+	
+}
+radio.onReceivedNumber(function (receivedNumber) {
+    control.waitForEvent(EventBusSource.MICROBIT_ID_BUTTON_A, control.eventTimestamp())
+    control.raiseEvent(
+    EventBusSource.MICROBIT_ID_BUTTON_A,
+    EventBusValue.MICROBIT_EVT_ANY
+    )
+    control.raiseEvent(
+    EventBusSource.MICROBIT_ID_BUTTON_A,
+    EventBusValue.MICROBIT_EVT_ANY
+    )
+    pins.digitalWritePin(DigitalPin.P0, 0)
+    serial.writeNumbers([0, 1])
+    pins.setAudioPinEnabled(false)
+    serial.writeBuffer(serial.readBuffer(pins.map(
+    0,
+    0,
+    1023,
+    0,
+    4
+    )))
+    serial.redirect(
+    SerialPin.P0,
+    SerialPin.P1,
+    BaudRate.BaudRate115200
+    )
+    serial.writeNumbers([0, 1])
+    pins.servoWritePin(AnalogPin.P0, 180)
+    pins.i2cWriteNumber(
+    0,
+    0,
+    NumberFormat.Int8LE,
+    false
+    )
+    pins.setMatrixWidth(DigitalPin.P0, 5)
+    pins.analogSetPitchPin(AnalogPin.P0)
+    pins.setAudioPinEnabled(false)
+    pins.analogWritePin(AnalogPin.P0, 1023)
 })
 let list: number[] = []
 let fps: datalogger.ColumnValue = null
+serial.writeBuffer(serial.readBuffer(pins.map(
+0,
+0,
+1023,
+0,
+4
+)))
+let text_list = 0
+serial.writeNumbers([0, 1])
+pins.analogWritePin(AnalogPin.P0, 1023)
 for (let index = 0; index < 4; index++) {
     let bnb1 = 0
     fps = datalogger.createCV("ops", pins.map(
@@ -26,6 +74,15 @@ for (let index = 0; index < 4; index++) {
     0,
     0
     )
+    radio.setGroup(sonar.ping(
+    DigitalPin.P10,
+    DigitalPin.P10,
+    PingUnit.Centimeters
+    ))
+    control.raiseEvent(
+    EventBusSource.MICROBIT_ID_BUTTON_A,
+    EventBusValue.MICROBIT_EVT_ANY
+    )
     radio.raiseEvent(
     EventBusSource.MICROBIT_ID_BUTTON_A,
     EventBusValue.MICROBIT_EVT_ANY
@@ -40,14 +97,14 @@ for (let index = 0; index < 4; index++) {
     0
     ])
     datalogger.log(
-    datalogger.createCV("", images.createBigImage(`
+    datalogger.createCV("ops", images.createBigImage(`
         # . . . . . . . . #
         . . . . # . . # . .
         . # # . . # . . . .
         . . . . . . # . . .
         . . # . . # . . . #
         `)),
-    datalogger.createCV("", game.createSprite(2, bnb1))
+    datalogger.createCV("90", game.createSprite(2, bnb1))
     )
     basic.showLeds(`
         # . . . #
@@ -63,9 +120,3 @@ for (let index = 0; index < 4; index++) {
     )
     led.unplot(0, 0)
 }
-basic.forever(function () {
-	
-})
-basic.forever(function () {
-	
-})
