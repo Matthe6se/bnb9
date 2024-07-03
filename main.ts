@@ -63,7 +63,7 @@ radio.onReceivedNumber(function (receivedNumber) {
     pins.analogWritePin(AnalogPin.P0, 1023)
 })
 let list: number[] = []
-let fps: datalogger.ColumnValue = null
+let fps = 0
 serial.writeBuffer(serial.readBuffer(pins.map(
 0,
 0,
@@ -71,20 +71,20 @@ serial.writeBuffer(serial.readBuffer(pins.map(
 0,
 4
 )))
-let text_list = 0
+let text_list = ["a", "b", "c"]
 serial.writeNumbers([0, 1])
 pins.analogWritePin(AnalogPin.P0, 1023)
 for (let index = 0; index < 4; index++) {
     let bnb1 = 0
-    fps = datalogger.createCV("ops", pins.map(
+    fps = 0
+    music.play(music.stringPlayable("E B C5 A B G A F ", 120), music.PlaybackMode.UntilDone)
+    basic.showString("" + (datalogger.createCV("ops", pins.map(
     0,
     0,
     1023,
     0,
     4
-    ))
-    music.play(music.stringPlayable("E B C5 A B G A F ", 120), music.PlaybackMode.UntilDone)
-    basic.showString("Hello!")
+    ))))
     serial.redirect(
     SerialPin.P0,
     SerialPin.P1,
